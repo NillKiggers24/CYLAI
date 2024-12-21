@@ -145,8 +145,10 @@ def predict():
             gender=data['gender'],
             predicted_days=predicted_days
         )
+        print("Saving to database...")
         db.session.add(pred)
         db.session.commit()
+        print("Data saved successfully!")
         return jsonify({'redirect_url': url_for('result')})
 
 
