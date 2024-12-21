@@ -1,0 +1,25 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Placeholder</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">CYL<span class="highlight">AI</span></div>
+        <ul class="nav-links">
+            <li><a href="{{ url_for('index') }}">HOME</a></li>
+            <li><a href="{{ url_for('about') }}">ABOUT US</a></li>
+            <li><a href="#">LIBRARY</a></li>
+            <li><a href="{{ url_for('result') }}">PROFILE</a></li>
+        </ul>
+        <a href="{{ url_for('login') }}" class="login-btn">LOGIN</a>
+    </nav>
+    <div class="container">
+        <h1 class="title">Здесь будет храниться ваше предсказание</h1>
+        <p>Пожалуйста, заполните форму на главной странице, чтобы получить прогноз.</p>
+        <a href="{{ url_for('index') }}">Вернуться на главную</a>
+    </div>
+</body>
+</html>

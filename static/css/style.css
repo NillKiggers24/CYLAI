@@ -1,0 +1,271 @@
+/* Общие стили */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    background-color: #f9f3fc;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Навигационное меню */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.navbar .logo {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.navbar .highlight {
+    color: #a54ed9;
+}
+
+.navbar .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.navbar .nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+.navbar .nav-links a:hover {
+    color: #a54ed9;
+}
+
+.login-btn {
+    background-color: #ec4bbe;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.login-btn:hover {
+    background-color: #3867d6;
+    text-decoration: none;
+}
+
+/* Основная форма */
+.container {
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.title {
+    color: #a54ed9;
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.prediction-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    width: 48%; /* Увеличим ширину */
+}
+
+.input-group select {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1.3em;
+    width: 100%; 
+}
+
+.input-group label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    text-align: left;
+}
+
+.input-group input {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(to right, #a54ed9, #e94f8e);
+    color: white;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+    background: linear-gradient(to right, #923fc4, #d6407b);
+    transform: scale(1.05);
+}
+/* Стили для страницы регистрации */
+.login-container .prediction-form {
+    display: flex;
+    flex-direction: column; /* Поля расположены вертикально */
+    gap: 20px;
+    justify-content: center;
+    align-items: center; /* Центровка элементов */
+}
+
+.login-container .input-group {
+    width: 100%; /* Поля занимают всю ширину контейнера */
+}
+
+.login-container .input-group input {
+    width: 100%; /* Растягиваем input на всю ширину */
+}
+.redirect-text {
+    margin-top: 20px; /* Отступ сверху, чтобы увеличить расстояние от кнопки */
+    font-size: 0.9em; /* Небольшой размер текста */
+    color: #555; /* Приглушённый цвет текста */
+    text-align: center; /* Центрируем текст */
+}
+
+.redirect-text a {
+    color: #734ed9; /* Фиолетовый цвет ссылки */
+    text-decoration: none; /* Убираем подчёркивание */
+}
+
+.redirect-text a:hover {
+    text-decoration: underline; /* Подчёркивание при наведении */
+}
+
+
+/* Адаптация для широких экранов */
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1200px;
+        padding: 40px;
+    }
+
+    .input-group {
+        width: 45%;
+    }
+}
+
+/* Стили для About Us */
+.about-container {
+    text-align: center;
+    padding: 30px 15px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.stats, .features {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.stat-item, .feature-item {
+    flex: 1 1 calc(33.333% - 20px);
+    text-align: center;
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-item:hover, .feature-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.stat-item img, .feature-item img {
+    width: 100%;
+    max-width: 300px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.stat-item h3, .feature-item h3 {
+    font-size: 1.5em;
+    color: #a54ed9;
+    margin-bottom: 10px;
+}
+
+.stat-item p, .feature-item p {
+    font-size: 1em;
+    color: #555;
+}
+
+/* Адаптация для мобильных устройств */
+@media (max-width: 768px) {
+    .stat-item, .feature-item {
+        flex: 1 1 100%;
+    }
+
+    .stat-item img, .feature-item img {
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+/* Адаптация под MacBook и средние экраны */
+@media (max-width: 1280px) {
+    .container {
+        max-width: 900px;
+        padding: 20px;
+    }
+
+    .input-group {
+        width: 48%;
+    }
+
+    .title {
+        font-size: 1.8em;
+    }
+}
+
+/* Адаптация под планшеты и мелкие экраны */
+@media (max-width: 768px) {
+    .prediction-form {
+        flex-direction: column;
+    }
+
+    .input-group {
+        width: 100%;
+    }
+
+    .submit-btn {
+        font-size: 1em;
+    }
+}

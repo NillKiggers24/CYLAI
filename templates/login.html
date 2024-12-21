@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <!-- Подключение CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Навигация -->
+    <nav class="navbar">
+        <div class="logo">CYL<span class="highlight">AI</span></div>
+        <ul class="nav-links">
+            <a href="{{ url_for('index') }}">HOME</a>
+            <li><a href="{{ url_for('about') }}">ABOUT US</a></li>
+            <li><a href="#">LIBRARY</a></li>
+            <li><a href="{{ url_for('result') }}">PROFILE</a></li>
+        </ul>
+    </nav>
+
+    <!-- Контент страницы регистрации -->
+    <div class="container login-container">
+        <h1 class="title">Create an Account</h1>
+        <form class="prediction-form" method="POST" action="{{ url_for('login') }}">
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Enter your username" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            </div>
+            <div class="input-group">
+                <label for="confirm-password">Confirm Password</label>
+                <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required>
+            </div>
+            <button type="submit" class="submit-btn">Register</button>
+        </form>
+        <p class="redirect-text">Already have an account? <a href="{{ url_for('login') }}">Login here</a></p>
+    </div>    
+</body>
+</html>

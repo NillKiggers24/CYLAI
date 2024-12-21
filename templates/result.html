@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Результат прогноза</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+        
+        body {
+            background-color: #f9f3fc;
+            color: #333;
+            font-family: "Montserrat", sans-serif;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .title {
+            text-align: center;
+            font-size: 2em;
+            color: #a54ed9;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0 20px;
+        }
+
+        ul li {
+            font-size: 1.1em;
+            color: #333;
+        }
+        .block ul li strong {
+            margin-left: 2px;
+            margin-right: 2px;
+        }
+        .gradient-text {
+            font-size: 2em;
+            font-weight: bold;
+            background: linear-gradient(to right, #a54ed9, #e94f8e); 
+            -webkit-background-clip: text;
+            background-clip: text; 
+            color: transparent; 
+        }
+
+        /* Рекомендации */
+        .block {
+            display: flex;
+            flex-direction: column; /* Расставляем элементы по вертикали */
+            align-items: center; /* Центрируем по горизонтали */
+            justify-content: center; /* Центрируем по вертикали */
+            background: #ffffff;
+            border: 1px solid #e8d5f7;
+            border-radius: 10px;
+            padding: 20px;
+            width: 80%; /* Ограничиваем ширину */
+            margin: 0 auto 20px auto; /* Центрируем блок по горизонтали */
+        }
+
+        /* Центровка заголовка внутри блока */
+        .block h3 {
+            color: #7a4d94;
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center; /* Центрируем текст внутри заголовка */
+        }
+
+        /* Центровка списка рекомендаций */
+        .block ul {
+            padding: 0;
+            text-align: center; /* Центрируем текст внутри списка */
+        }
+
+        /* Центрируем отдельные элементы списка */
+        .block ul li {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        /* Полезные материалы */
+        .materials {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+            justify-content: center;
+            
+        }
+
+        .material-card {
+            background-color: #fff;
+            border: 1px solid #e4dbf8;
+            border-radius: 15px;
+            width: 220px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .material-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .material-card h4 {
+            font-size: 1.2em;
+            color: #a54ed9;
+            margin: 10px 0;
+        }
+
+        .material-card p {
+            font-size: 0.95em;
+            color: #555;
+            margin: 5px 10px 15px;
+        }
+
+        .material-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Кнопка */
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #a54ed9;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #8c3fb4;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">CYL<span class="highlight">AI</span></div>
+        <ul class="nav-links">
+            <li><a href="{{ url_for('index') }}">HOME</a></li>
+            <li><a href="{{ url_for('about') }}">ABOUT US</a></li>
+            <li><a href="#">LIBRARY</a></li>
+            <li><a href="{{ url_for('result') }}">PROFILE</a></li>
+        </ul>
+        <a href="{{ url_for('index') }}" class="login-btn">LOGIN</a>
+    </nav>
+    <div class="container">
+        <h1 class="title">Результат прогноза</h1>
+        <p class="subtitle">На основе введённых данных:</p>
+        <ul>
+            <li>Рост: <strong>{{ prediction.height }} см</strong></li>
+            <li>Текущий вес: <strong>{{ prediction.weight }} кг</strong></li>
+            <li>Целевой вес: <strong>{{ prediction.target_weight }} кг</strong></li>
+        </ul>
+        <h2 class="subtitle">Прогнозируемое время достижения цели:</h2>
+        <p class="gradient-text">{{ prediction.predicted_days }} дней</p>
+        <a href="{{ url_for('index') }}" class="btn">На главную</a>
+    </div>
+    <div class="block">
+        <h3>Рекомендации:</h3>
+        <ul>
+            <li>Поддерживайте калорийность рациона на уровне <strong> {{ calories_needed_for_loss }} </strong> ккал в день</li>
+            <li>Увеличьте потребление белка для сохранения мышечной массы</li>
+            <li>Выполняйте силовые тренировки 3-4 раза в неделю</li>
+            <li>Следите за качеством сна и уровнем стресса</li>
+        </ul>
+    </div>
+    <h2 class="title">Полезные материалы</h2>
+    <div class="materials">
+        <div class="material-card">
+            <img src="{{ url_for('static', filename='img/пп.jpg') }}" alt="Здоровое питание">
+            <h4>Здоровое питание</h4>
+            <p>Советы по правильному питанию</p>
+        </div>
+        <div class="material-card">
+            <img src="{{ url_for('static', filename='img/ст.webp') }}" alt="Силовые тренировки">
+            <h4>Силовые тренировки</h4>
+            <p>Программа упражнений</p>
+        </div>
+        <div class="material-card">
+            <img src="{{ url_for('static', filename='img/кк.jpg') }}" alt="Контроль калорий">
+            <h4>Контроль калорий</h4>
+            <p>Как считать калории</p>
+        </div>
+        <div class="material-card">
+            <img src="{{ url_for('static', filename='img/сон.jpeg') }}" alt="Здоровый сон">
+            <h4>Здоровый сон</h4>
+            <p>Важность режима сна</p>
+        </div>
+    </div>
+</body>
+</html>

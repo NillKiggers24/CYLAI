@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+        </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Навигация -->
+    <nav class="navbar">
+        <div class="logo">CYL<span class="highlight">AI</span></div>
+        <ul class="nav-links">
+            <li><a href="{{ url_for('index') }}">HOME</a></li>
+            <li><a href="{{ url_for('about') }}">ABOUT US</a></li>
+            <li><a href="#">LIBRARY</a></li>
+            <li><a href="{{ url_for('result') }}">PROFILE</a></li>
+        </ul>
+        <a href="{{ url_for('index') }}" class="login-btn">HOME</a>
+    </nav>
+
+    <!-- Основной контент -->
+    <div class="container about-container">
+        <h1 class="title">CHANGE YOUR LIFE AI</h1>
+        <p class="description">Наша миссия - помочь людям сделать первый шаг в построении тела мечты</p>
+
+        <!-- Секция статистики -->
+        <div class="stats">
+            <div class="stat-item">
+                <img src="{{ url_for('static', filename='img/хз.jpeg') }}" alt="Запросы">
+                <h3>100 млн+</h3>
+                <p>Запросов обработано</p>
+            </div>
+            <div class="stat-item">
+                <img src="{{ url_for('static', filename='img/люди.jpg') }}" alt="Жизни">
+                <h3>50 тысяч+</h3>
+                <p>Люди изменили свою жизнь</p>
+            </div>
+            <div class="stat-item">
+                <img src="{{ url_for('static', filename='img/консультация.jpeg') }}" alt="Поддержка">
+                <h3>24/7</h3>
+                <p>Поддержка клиентов</p>
+            </div>
+        </div>
+
+        <!-- Секция цели -->
+        <div class="goal-section">
+            <h2>Наша цель</h2>
+            <p>Мы верим в инновации, творчество и силу технологий для преобразования жизни. Мы стремимся создавать решения, которые пойдут на пользу нашим пользователям, уделяя особое внимание вашему опыту и передовым технологиям.</p>
+        </div>
+
+        <!-- Секция особенностей -->
+        <div class="features">
+            <div class="feature-item">
+                <img src="{{ url_for('static', filename='img/питание.jpeg') }}" alt="Питание">
+                <h3>Питание</h3>
+                <p>Всевозможные планы питания и рекомендации для достижения ваших целей.</p>
+            </div>
+            <div class="feature-item">
+                <img src="{{ url_for('static', filename='img/тренировки.jpeg') }}" alt="Тренировки">
+                <h3>Тренировки</h3>
+                <p>Эффективные программы тренировок, адаптированные к вашему уровню.</p>
+            </div>
+            <div class="feature-item">
+                <img src="{{ url_for('static', filename='img/Общение.jpeg') }}" alt="Общение">
+                <h3>Общение</h3>
+                <p>Постоянная поддержка и консультации с нашими экспертами.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

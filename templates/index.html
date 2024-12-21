@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weight Loss Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .title {
+            text-align: center;
+            position: relative;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .bi {
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #070707;
+            margin-left: 10px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 10% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 50%;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-content h2 {
+            margin-top: 0;
+        }
+
+        .close-btn {
+            float: right;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            color: #000;
+        }
+
+        .close-btn:hover {
+            color: #f00;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">CYL<span class="highlight">AI</span></div>
+        <ul class="nav-links">
+            <li><a href="#">HOME</a></li>
+            <li><a href="{{ url_for('about') }}">ABOUT US</a></li>
+            <li><a href="#">LIBRARY</a></li>
+            <li><a href="{{ url_for('result') }}">PROFILE</a></li>
+        </ul>
+        <a href="{{ url_for('login') }}" class="login-btn">LOGIN</a>
+    </nav>
+
+    <div class="container">
+        <h1 class="title">
+            Weight Loss Prediction
+            <i class="bi bi-question-circle" id="help-icon"></i>
+        </h1>
+        <form class="prediction-form">
+            <div class="input-group">
+                <label for="height">Height (cm)</label>
+                <input type="number" id="height" placeholder="Enter your height">
+            </div>
+            <div class="input-group">
+                <label for="weight">Current Weight (kg)</label>
+                <input type="number" id="weight" placeholder="Enter your weight">
+            </div>
+            <div class="input-group">
+                <label for="gender">Gender</label>
+                <input type="number" id="gender" placeholder="Enter your gender">
+            </div>
+            <div class="input-group">
+                <label for="bodyFat">Body Fat %</label>
+                <input type="number" id="bodyFat" placeholder="Enter body fat percentage">
+            </div>
+            <div class="input-group">
+                <label for="deficit">Daily Caloric Deficit</label>
+                <input type="number" id="deficit" placeholder="Enter caloric deficit">
+            </div>
+            <div class="input-group">
+                <label for="target">Target Weight (kg)</label>
+                <input type="number" id="target" placeholder="Enter target weight">
+            </div>
+            <button type="submit" class="submit-btn">Calculate Prediction</button>
+        </form>
+    </div>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Пособие для чайников</h2>
+            <p>
+                Для предсказания потери веса заполните форму следующими данными:
+                <div>
+                    <p><b>Height (cm):</b> Ваш рост в сантиметрах (150 - 190)</p>
+                    <p><b>Current Weight (kg):</b> Ваш текущий вес (57-140)</p>
+                    <p><b>Gender:</b> Укажите ваш пол (0 — мужчина, 1 — женщина).</p>
+                    <p><b>Body Fat %:</b> Процент жира в организме (не более 35)</p>
+                    <p><b>Daily Caloric Deficit:</b> Дневной дефицит калорий (не более 1000)</p>
+                    <p><b>Target Weight (kg):</b> Желаемый вес (разумно)</p>
+                </div>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById('modal');
+        const helpIcon = document.getElementById('help-icon');
+        const closeBtn = document.querySelector('.close-btn');
+
+        helpIcon.addEventListener('click', () => {
+            modal.style.display = 'block';
+        });
+
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        document.querySelector('.prediction-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const inputs = [
+                { id: 'height', name: 'Height', min: 150, max: 190 },
+                { id: 'weight', name: 'Weight', min: 57, max: 140 },
+                { id: 'gender', name: 'Gender', min: 0, max: 1 },
+                { id: 'bodyFat', name: 'Body Fat %', min: 12, max: 40 },
+                { id: 'deficit', name: 'Daily Caloric Deficit', min: 0, max: 1000 },
+                { id: 'target', name: 'Target Weight', min: 57, max: 140 },
+            ];
+
+            let isValid = true;
+
+            inputs.forEach(input => {
+                const field = document.getElementById(input.id);
+                const value = field.value.trim();
+
+                if (!value) {
+                    alert(`Please enter ${input.name}.`);
+                    isValid = false;
+                    return;
+                }
+
+                if (isNaN(value)) {
+                    alert(`The ${input.name} field must contain a numeric value.`);
+                    isValid = false;
+                    return;
+                }
+
+                const numValue = parseFloat(value);
+                if (numValue < input.min || numValue > input.max) {
+                    alert(`The ${input.name} must be between ${input.min} and ${input.max}.`);
+                    isValid = false;
+                    return;
+                }
+            });
+
+            if (isValid) {
+                fetch('/predict', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        height: parseFloat(document.getElementById('height').value),
+                        weight: parseFloat(document.getElementById('weight').value),
+                        gender: parseInt(document.getElementById('gender').value),
+                        bodyFat: parseFloat(document.getElementById('bodyFat').value),
+                        calorieDeficit: parseFloat(document.getElementById('deficit').value),
+                        targetWeight: parseFloat(document.getElementById('target').value)
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.redirect_url) {
+                        window.location.href = data.redirect_url;
+                    } else {
+                        alert('Prediction failed. Try again.');
+                    }
+                })
+                .catch(err => console.error('Error:', err));
+            }
+        });
+    </script>
+</body>
+</html>
